@@ -58,7 +58,7 @@ public class UserService {
     @Transactional
     public void deleteUser(Long id) {
         User user = userRepository.findById(id)
-                                  .orElseThrow(() -> new IllegalArgumentException("User not found"));
+                                  .orElseThrow(() -> new EntityNotFoundException("User not found"));
 
         userRepository.delete(user);
     }

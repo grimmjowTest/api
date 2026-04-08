@@ -15,11 +15,11 @@ public class MovieService {
 
     private final MovieRepository movieRepository;
 
-    public MovieService(MovieRepository movieRepository) {
+    public MovieService (MovieRepository movieRepository) {
         this.movieRepository = movieRepository;
     }
     
-    public List<Movie> getAllMovies() {
+    public List<Movie> getAllMovies () {
         return movieRepository.findAll();
     }
 
@@ -32,10 +32,21 @@ public class MovieService {
         return movieRepository.save(movie);
     }
 
+    public Movie updateMovie (Long id, Movie updatedMovie) {
+        Movie existingMovie = movieRepository.findById(id)
+                                             .orElseThrow(() -> new IllegalArgumentException("Movie not found"));
+
+        existingMovie.setTitle(updatedMovie.getTitle());
+        existingMovie.setGenre(updatedMovie.getGenre());
+        existingMovie.setReleaseDate(updatedMovie.getReleaseDate());
+
+        return movieRepository.save(existingMovie);
+    }
+
     @Transactional
     public void deleteMovie (Long id) {
         Movie movie = movieRepository.findById(id)
-                                     .orElseThrow(() -> new IllegalArgumentException("Movie not found"));
+                                     .orElseThrow(() -> new EntityNotFoundException("Movie not found"));
 
         movieRepository.delete(movie);
     }
