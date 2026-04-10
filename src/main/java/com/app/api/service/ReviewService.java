@@ -12,6 +12,8 @@ import com.app.api.repository.MovieRepository;
 import com.app.api.repository.ReviewRepository;
 import com.app.api.repository.UserRepository;
 
+import jakarta.persistence.EntityNotFoundException;
+
 @Service
 public class ReviewService {
 
@@ -27,6 +29,11 @@ public class ReviewService {
 
     public List<Review> getAllReviews () {
         return reviewRepository.findAll();
+    }
+
+    public Review getReviewById (Long id) {
+        return reviewRepository.findById(id)
+                               .orElseThrow(() -> new EntityNotFoundException("Review not found"));
     }
 
     public List<Review> getReviewsByUserId (Long userId) {
@@ -54,6 +61,16 @@ public class ReviewService {
         review.setMovie(movie);
 
         return reviewRepository.save(review);
+    }
+
+    public Review updateReview(Long id, Review updatedReview) {
+        Review existingReview = reviewRepository.findById(id)
+                                                .orElseThrow(() -> new IllegalArgumentException("Review not found"));
+
+        existingReview.setRating(updatedReview.getRating());
+        existingReview.setComment(updatedReview.getComment());
+
+        return reviewRepository.save(existingReview);
     }
 
     @Transactional
