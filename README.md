@@ -32,7 +32,6 @@ Swagger UI: http://localhost:8080/swagger-ui/index.html
 🚧 Future Improvements
 
 - JWT-based authentication and authorization
-- Review DTO implementation for better data encapsulation
 - Role-based access control (admin/user)
 - Pagination and sorting for API endpoints
 - Unit and integration testing
