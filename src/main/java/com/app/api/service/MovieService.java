@@ -5,50 +5,50 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.app.api.dto.movie.MovieRequestDTO;
 import com.app.api.entity.Movie;
+import com.app.api.mapper.MovieMapper;
 import com.app.api.repository.MovieRepository;
 
 import jakarta.persistence.EntityNotFoundException;
 
+import lombok.RequiredArgsConstructor;
+
 @Service
+@RequiredArgsConstructor
 public class MovieService {
 
     private final MovieRepository movieRepository;
-
-    public MovieService (MovieRepository movieRepository) {
-        this.movieRepository = movieRepository;
-    }
     
-    public List<Movie> getAllMovies () {
+    public List<Movie> getAllMovies() {
         return movieRepository.findAll();
     }
 
-    public Movie getMovieById (Long id) {
+    public Movie getMovieById(Long id) {
         return movieRepository.findById(id)
                               .orElseThrow(() -> new EntityNotFoundException("Movie not found"));
     }
 
-    public Movie saveMovie (Movie movie) {
+    public Movie createMovie(MovieRequestDTO movieRequestDTO) {
+        Movie movie = MovieMapper.toEntity(movieRequestDTO);
+
         return movieRepository.save(movie);
     }
 
-    public Movie updateMovie (Long id, Movie updatedMovie) {
+    public Movie updateMovie(Long id, MovieRequestDTO movieRequestDTO) {
         Movie existingMovie = movieRepository.findById(id)
                                              .orElseThrow(() -> new IllegalArgumentException("Movie not found"));
 
-        existingMovie.setTitle(updatedMovie.getTitle());
-        existingMovie.setGenre(updatedMovie.getGenre());
-        existingMovie.setReleaseDate(updatedMovie.getReleaseDate());
+        MovieMapper.updateEntity(existingMovie, movieRequestDTO);
 
         return movieRepository.save(existingMovie);
     }
 
     @Transactional
-    public void deleteMovie (Long id) {
+    public void deleteMovie(Long id) {
         Movie movie = movieRepository.findById(id)
                                      .orElseThrow(() -> new EntityNotFoundException("Movie not found"));
 
         movieRepository.delete(movie);
     }
-
 }
