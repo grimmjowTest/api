@@ -6,7 +6,20 @@ RESTful API built with Spring Boot for managing users, movies and reviews.
 
 Swagger UI: http://localhost:8080/swagger-ui/index.html
 
-<img width="670" height="570" alt="swagger" src="https://github.com/user-attachments/assets/b2c75878-830f-4079-97d7-e1b1c042e2cb" />
+  - auth-controller:
+<img width="800" alt="auth-controller" src="https://github.com/user-attachments/assets/99a32d2f-ff94-4b95-8ceb-bfe47baff41f" />
+
+
+  - user-controller:
+<img width="750" alt="user-controller" src="https://github.com/user-attachments/assets/164808b7-9edc-4123-b158-d2892c19a75a" />
+
+
+  - review-controller:
+<img width="750" alt="review-controller" src="https://github.com/user-attachments/assets/37a25829-f826-4a7b-ad2d-88f4b36559f7" />
+
+
+  - movie-controller:
+<img width="750" alt="movie-controller" src="https://github.com/user-attachments/assets/ec7d5572-a665-464f-81f5-c8d18ffe2853" />
 
 
 🗄️ Database Diagram
@@ -28,14 +41,12 @@ Swagger UI: http://localhost:8080/swagger-ui/index.html
 - Jakarta Validation (@Size, @NotNull, @Email)
 - User–movie relationships (favorite movies)
 - Input validation and global exception handling
+- JWT Authentication & Authorization
 
 🚧 Future Improvements
 
-- JWT-based authentication and authorization
-- Role-based access control (admin/user)
+- Password encryption with BCrypt
 - Pagination and sorting for API endpoints
-- Unit and integration testing
-- Descriptions for Swagger documentation
   
 👤 Author
 - Berceanu Adrian
