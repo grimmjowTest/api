@@ -23,13 +23,11 @@ public class UserMapper {
         if (user == null) 
             return null;
 
-        UserResponseDTO userResponseDTO = new UserResponseDTO();
-        
-        userResponseDTO.setId(user.getId());
-        userResponseDTO.setUsername(user.getUsername());
-        userResponseDTO.setEmail(user.getEmail());
-
-        return userResponseDTO;
+        return new UserResponseDTO(
+            user.getId(),
+            user.getUsername(),
+            user.getEmail()
+        );
     }
 
     public static void updateEntity(User user, UserRequestDTO userRequestDTO) {

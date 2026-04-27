@@ -2,14 +2,25 @@ package com.app.api.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
+import com.app.api.dto.movie.MovieResponseDTO;
 import com.app.api.dto.user.UserRequestDTO;
 import com.app.api.dto.user.UserResponseDTO;
+import com.app.api.entity.Movie;
 import com.app.api.entity.User;
+import com.app.api.mapper.MovieMapper;
 import com.app.api.mapper.UserMapper;
 import com.app.api.service.UserService;
 
@@ -40,6 +51,17 @@ public class UserController {
         User user = userService.getUserById(id);
 
         return ResponseEntity.ok(UserMapper.toDTO(user));
+    }
+
+    @GetMapping("/{id}/movies")
+    public ResponseEntity<List<MovieResponseDTO>> getFavoriteMovies(@PathVariable Long id) {
+        Set<Movie> movies = userService.getUserMovies(id);
+        List<MovieResponseDTO> response = new ArrayList<>();
+
+        for (Movie movie : movies) 
+            response.add(MovieMapper.toDTO(movie));
+
+        return ResponseEntity.ok(response);
     }
 
     @PostMapping
