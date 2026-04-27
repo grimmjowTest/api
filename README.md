@@ -41,7 +41,7 @@ Swagger UI: http://localhost:8080/swagger-ui/index.html
 - Jakarta Validation (@Size, @NotNull, @Email)
 - User–movie relationships (favorite movies)
 - Input validation and global exception handling
-- JWT Authentication & Authorization
+- JWT-based authentication and secure endpoint access
 
 🚧 Future Improvements
 
