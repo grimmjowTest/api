@@ -2,6 +2,8 @@ package com.app.api.dto.review;
 
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,5 +27,6 @@ public class ReviewResponseDTO {
 
     private String comment;
 
+    @JsonFormat(pattern = "dd-MM-yyyy hh:mm a", timezone = "Europe/Bucharest")
     private LocalDateTime createdAt;
 }

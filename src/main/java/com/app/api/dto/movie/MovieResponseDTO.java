@@ -3,6 +3,8 @@ package com.app.api.dto.movie;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,5 +24,6 @@ public class MovieResponseDTO {
 
     private LocalDate releaseDate;
 
+    @JsonFormat(pattern = "dd-MM-yyyy hh:mm a", timezone = "Europe/Bucharest")
     private LocalDateTime createdAt;
 }

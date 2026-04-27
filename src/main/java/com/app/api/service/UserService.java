@@ -1,6 +1,7 @@
 package com.app.api.service;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,6 +30,13 @@ public class UserService {
     public User getUserById(Long id) {
         return userRepository.findById(id)
                              .orElseThrow(() -> new EntityNotFoundException("User not found"));
+    }
+
+    public Set<Movie> getUserMovies(Long userId) {
+        User user = userRepository.findById(userId)
+                                  .orElseThrow(() -> new EntityNotFoundException("User not found"));
+
+        return user.getMovies();
     }
 
     public User createUser(UserRequestDTO userRequestDTO) {
