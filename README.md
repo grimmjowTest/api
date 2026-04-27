@@ -24,7 +24,7 @@ Swagger UI: http://localhost:8080/swagger-ui/index.html
 
 🗄️ Database Diagram
 
-<img width="450" alt="database_diagram" src="https://github.com/user-attachments/assets/3de9269b-f66d-4ecd-88b8-e2addadb5b4c"/>
+<img width="300" alt="database_diagram" src="https://github.com/user-attachments/assets/3de9269b-f66d-4ecd-88b8-e2addadb5b4c"/>
 
 
 🛠️ Tech Stack
