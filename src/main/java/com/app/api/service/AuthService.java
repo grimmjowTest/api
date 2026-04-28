@@ -2,6 +2,7 @@ package com.app.api.service;
 
 import java.util.Date;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.app.api.entity.User;
@@ -18,13 +19,14 @@ public class AuthService {
 
     private final JwtUtil jwtUtil;
 
+    private final PasswordEncoder passwordEncoder;
+
     public String login(String username, String password) {
         User user = userRepository.findByUsername(username)
                                   .orElseThrow(() -> new IllegalArgumentException("User not found"));
 
-        if (!user.getPassword().equals(password)) {
+        if (!passwordEncoder.matches(password, user.getPassword())) 
             throw new IllegalArgumentException("Invalid password");
-        }
 
         return jwtUtil.generateToken(username);
     }

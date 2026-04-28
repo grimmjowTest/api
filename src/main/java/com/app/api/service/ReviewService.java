@@ -23,7 +23,9 @@ import lombok.RequiredArgsConstructor;
 public class ReviewService {
 
     private final ReviewRepository reviewRepository;
+
     private final UserRepository userRepository;
+    
     private final MovieRepository movieRepository;
 
     public List<Review> getAllReviews() {

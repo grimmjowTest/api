@@ -21,6 +21,7 @@ import com.app.api.mapper.MovieMapper;
 import com.app.api.service.MovieService;
 
 import jakarta.validation.Valid;
+
 import lombok.RequiredArgsConstructor;
 
 @RestController
