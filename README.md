@@ -41,11 +41,11 @@ Swagger UI: http://localhost:8080/swagger-ui/index.html
 - Jakarta Validation (@Size, @NotNull, @Email)
 - User–movie relationships (favorite movies)
 - Input validation and global exception handling
-- JWT-based authentication and secure endpoint access
+- Secured authentication using JWT and BCrypt password hashing
 
 🚧 Future Improvements
 
-- Password encryption with BCrypt
+- Roles + permissions
 - Pagination and sorting for API endpoints
   
 👤 Author
