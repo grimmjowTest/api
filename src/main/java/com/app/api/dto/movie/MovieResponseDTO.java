@@ -22,6 +22,7 @@ public class MovieResponseDTO {
 
     private String genre;
 
+    @JsonFormat(pattern = "dd-MM-yyyy")
     private LocalDate releaseDate;
 
     @JsonFormat(pattern = "dd-MM-yyyy hh:mm a", timezone = "Europe/Bucharest")

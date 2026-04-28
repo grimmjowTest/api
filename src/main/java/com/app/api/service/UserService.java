@@ -3,6 +3,7 @@ package com.app.api.service;
 import java.util.List;
 import java.util.Set;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,7 +22,10 @@ import lombok.RequiredArgsConstructor;
 public class UserService {
 
     private final UserRepository userRepository;
+
     private final MovieRepository movieRepository;
+
+    private final PasswordEncoder passwordEncoder;
 
     public List<User> getAllUsers() {
         return userRepository.findAll();
@@ -47,6 +51,7 @@ public class UserService {
             throw new IllegalArgumentException("Email already exists");
 
         User user = UserMapper.toEntity(userRequestDTO);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
 
         return userRepository.save(user);
     }
@@ -62,6 +67,7 @@ public class UserService {
             throw new IllegalArgumentException("Email already exists");
 
         UserMapper.updateEntity(existingUser, userRequestDTO);
+        existingUser.setPassword(passwordEncoder.encode(userRequestDTO.getPassword()));
 
         return userRepository.save(existingUser);
     }
