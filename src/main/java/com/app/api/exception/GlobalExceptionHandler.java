@@ -44,4 +44,16 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
     }
 
+    // for any other unhandled exceptions
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<Map<String, String>> handleAll(Exception ex) {
+
+        ex.printStackTrace();
+
+        Map<String, String> error = new HashMap<>();
+        error.put("error", ex.getClass().getSimpleName());
+        error.put("message", ex.getMessage());
+
+        return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 }

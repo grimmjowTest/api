@@ -23,5 +23,4 @@ public class UserRequestDTO {
     @NotBlank(message = "Password is mandatory and cannot be empty")
     @Size(max = 255, message = "Password cannot exceed 255 characters")
     private String password;
-
 }
