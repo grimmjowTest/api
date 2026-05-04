@@ -1,10 +1,12 @@
 package com.app.api.security;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -29,7 +31,13 @@ public class JwtFilter extends OncePerRequestFilter {
             String token = authHeader.substring(7);
             if (jwtUtil.validateToken(token)) {
                 String username = jwtUtil.extractUsername(token);
-                UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(username, null, new ArrayList<>());
+                String role = jwtUtil.extractRole(token);
+
+                List<GrantedAuthority> authorities = List.of(
+                    new SimpleGrantedAuthority("ROLE_" + role)
+                );
+
+                UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(username, null, authorities);
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             } else {
                 response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);

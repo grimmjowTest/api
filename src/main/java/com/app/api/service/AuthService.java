@@ -28,7 +28,7 @@ public class AuthService {
         if (!passwordEncoder.matches(password, user.getPassword())) 
             throw new IllegalArgumentException("Invalid password");
 
-        return jwtUtil.generateToken(username);
+        return jwtUtil.generateToken(user);
     }
 
     public Date getTokenExpirationDate(String token) {

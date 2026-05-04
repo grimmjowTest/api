@@ -52,13 +52,14 @@ public class UserService {
 
         User user = UserMapper.toEntity(userRequestDTO);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setRole(User.Role.USER);
 
         return userRepository.save(user);
     }
 
     public User updateUser(Long id, UserRequestDTO userRequestDTO) {
         User existingUser = userRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("User not found"));
+                                          .orElseThrow(() -> new EntityNotFoundException("User not found"));
 
         if (userRepository.existsByUsernameAndIdNot(userRequestDTO.getUsername(), id))
             throw new IllegalArgumentException("Username already exists");

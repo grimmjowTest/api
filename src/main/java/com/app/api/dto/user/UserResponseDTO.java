@@ -3,6 +3,9 @@ package com.app.api.dto.user;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.NoArgsConstructor;
+
+import com.app.api.entity.User.Role;
+
 import lombok.AllArgsConstructor;
 
 @Getter
@@ -16,4 +19,6 @@ public class UserResponseDTO {
     private String username;
 
     private String email;
+
+    private Role role;
 }
